@@ -1,0 +1,60 @@
+{
+  "name": "book_reading_record_backend",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "lint": "eslint --ext .js --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "ali-oss": "^6.17.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^16.0.1",
+    "express": ">=5.0.0-beta.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.3.0",
+    "lodash-es": "^4.17.21",
+    "mongoose": "^5.11.0",
+    "multer": "^1.4.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-strip": "^2.1.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@types/ali-oss": "^6.16.4",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.19.2",
+    "@types/debug": "^4.1.7",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/lodash-es": "^4.17.6",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.0.4",
+    "colors": "^1.4.0",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.2.0",
+    "nodemon": "^1.18.4",
+    "prettier": "2.7.1",
+    "rollup": "^2.77.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "tsc-alias": "^1.6.11",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "unplugin-auto-import": "^0.9.3",
+    "vite": "^2.9.8",
+    "vite-node": "^0.18.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "globals": {
+    "assign": true,
+    "axios": true,
+    "forEach": true,
+    "isPlainObject": true,
+    "merge": true,
+    "remove": true,
+    "throttle": true
+  }
+}
