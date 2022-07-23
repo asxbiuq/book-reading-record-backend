@@ -81,7 +81,7 @@ try {
     }
   }
   console.log('mongodb connected!')
-  app.listen(8080)
+  app.listen(process.env.PORT || 8080)
 } catch (err: any) {
   console.log(err.message)
 }
