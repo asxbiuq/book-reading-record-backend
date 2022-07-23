@@ -1,6 +1,9 @@
 {
   "name": "book_reading_record_backend",
   "type": "module",
+  "engines": {
+    "node":"16.15.0"
+  },
   "scripts": {
     "build": "rollup -c",
     "build:watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
