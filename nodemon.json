@@ -1,6 +1,6 @@
 {
-  "watch": ["src"],
-  "ext": "ts,json",
+  "watch": ["dist"],
+  "ext": "js,json",
   "ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
-  "exec": "pnpm vite-node src/index.ts"
+  "exec": "node dist/index.js"
 }

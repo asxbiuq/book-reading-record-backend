@@ -10,6 +10,7 @@ import fs, { realpathSync } from 'fs';
 import { config } from 'dotenv';
 import OSS from 'ali-oss';
 import { assign, last } from 'lodash-es';
+import { fileURLToPath } from 'url';
 
 // import { Schema, model } from 'mongoose'
 const { Schema: Schema$3, model: model$3, set: set$4, connect: connect$4 } = mongoose;
@@ -778,6 +779,7 @@ const errorHandler = (error, req, res, next) => {
 const { set, connect } = mongoose;
 const { diskStorage } = multer;
 const app = express();
+const rootUrl = fileURLToPath(new URL('../', import.meta.url).href);
 const fileStorage = diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'tmp/');
@@ -804,8 +806,11 @@ app.use(multer({
     storage: fileStorage,
     fileFilter: fileFilter,
 }).single('image'));
-// app.use('/public', express.static('public'))
 app.use(setHeader);
+app.get("/", (req, res, next) => {
+    res.sendFile(`${rootUrl}/public/index.html`);
+});
+app.use('/', express.static('public'));
 app.use('/auth', router$4);
 app.use('/reply', router);
 app.use('/comment', router$1);
@@ -826,7 +831,8 @@ try {
         };
     }
     console.log('mongodb connected!');
-    app.listen(8080);
+    app.listen(process.env.PORT);
+    console.log('express listening: ', process.env.PORT);
 }
 catch (err) {
     console.log(err.message);

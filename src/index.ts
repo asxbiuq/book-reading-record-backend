@@ -13,8 +13,12 @@ import replyRoutes from 'routes/feed/reply.js'
 import setHeader from 'middleware/setHeader.js'
 import { errorHandler } from 'middleware/handleError.js'
 import '@/config/env.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
 
 const app = express()
+const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
 
 const fileStorage = diskStorage({
   destination: (req, file, cb) => {
@@ -57,7 +61,12 @@ app.use(
 
 app.use(setHeader)
 
-app.use('/', express.static('public/index.html'))
+
+
+app.get("/", (req, res,next) => {
+  res.sendFile(`${rootUrl}/public/index.html`)
+});
+app.use('/', express.static('public'))
 app.use('/auth', authRoutes)
 app.use('/reply', replyRoutes)
 app.use('/comment', commentRoutes)
@@ -81,7 +90,8 @@ try {
     }
   }
   console.log('mongodb connected!')
-  app.listen(process.env.PORT || 8080)
+  app.listen(process.env.PORT)
+  console.log('express listening: ',process.env.PORT)
 } catch (err: any) {
   console.log(err.message)
 }

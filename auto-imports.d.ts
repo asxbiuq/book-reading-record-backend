@@ -16,9 +16,7 @@ declare module '@vue/runtime-core' {
     readonly assign: UnwrapRef<typeof import('lodash-es')['assign']>
     readonly axios: UnwrapRef<typeof import('axios')['default']>
     readonly forEach: UnwrapRef<typeof import('lodash-es')['forEach']>
-    readonly isPlainObject: UnwrapRef<
-      typeof import('lodash-es')['isPlainObject']
-    >
+    readonly isPlainObject: UnwrapRef<typeof import('lodash-es')['isPlainObject']>
     readonly merge: UnwrapRef<typeof import('lodash-es')['merge']>
     readonly remove: UnwrapRef<typeof import('lodash-es')['remove']>
     readonly throttle: UnwrapRef<typeof import('lodash-es')['throttle']>
