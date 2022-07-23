@@ -54,10 +54,10 @@ app.use(
     fileFilter: fileFilter,
   }).single('image')
 )
-// app.use('/public', express.static('public'))
 
 app.use(setHeader)
 
+app.use('/', express.static('public/index.html'))
 app.use('/auth', authRoutes)
 app.use('/reply', replyRoutes)
 app.use('/comment', commentRoutes)
