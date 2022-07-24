@@ -4,6 +4,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^22.0.1
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
+  '@rollup/plugin-run': ^2.1.0
   '@rollup/plugin-strip': ^2.1.0
   '@rollup/plugin-typescript': ^8.3.3
   '@types/ali-oss': ^6.16.4
@@ -58,6 +59,7 @@ devDependencies:
   '@rollup/plugin-commonjs': registry.npmmirror.com/@rollup/plugin-commonjs/22.0.1_rollup@2.77.0
   '@rollup/plugin-json': registry.npmmirror.com/@rollup/plugin-json/4.1.0_rollup@2.77.0
   '@rollup/plugin-node-resolve': registry.npmmirror.com/@rollup/plugin-node-resolve/13.3.0_rollup@2.77.0
+  '@rollup/plugin-run': registry.npmmirror.com/@rollup/plugin-run/2.1.0_rollup@2.77.0
   '@rollup/plugin-strip': registry.npmmirror.com/@rollup/plugin-strip/2.1.0_rollup@2.77.0
   '@rollup/plugin-typescript': registry.npmmirror.com/@rollup/plugin-typescript/8.3.3_sbpikdwgo7pbmeew3vug7t5zyu
   '@types/ali-oss': registry.npmmirror.com/@types/ali-oss/6.16.4
@@ -284,6 +286,19 @@ packages:
       rollup: registry.npmmirror.com/rollup/2.77.0
     dev: true
 
+  registry.npmmirror.com/@rollup/plugin-run/2.1.0_rollup@2.77.0:
+    resolution: {integrity: sha512-jMtIKu/MamhHsk9S+BQ8DR3D4WGWflgjPCODB3waYMdimyvd3efqTmX6jqclQAu+Ed7RBUvbpf4PtJ1ly1rdKA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@rollup/plugin-run/-/plugin-run-2.1.0.tgz}
+    id: registry.npmmirror.com/@rollup/plugin-run/2.1.0
+    name: '@rollup/plugin-run'
+    version: 2.1.0
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^2.0.0
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/14.0.26
+      rollup: registry.npmmirror.com/rollup/2.77.0
+    dev: true
+
   registry.npmmirror.com/@rollup/plugin-strip/2.1.0_rollup@2.77.0:
     resolution: {integrity: sha512-OKlIlXMFlH4nVxq0beNSIKVw0LkpNUpVjjvfzH5OAOAR5dhLZgLZBzwYX4ifIAs18YDrreMcZH4xnKmW9fI2AQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@rollup/plugin-strip/-/plugin-strip-2.1.0.tgz}
     id: registry.npmmirror.com/@rollup/plugin-strip/2.1.0
@@ -480,6 +495,12 @@ packages:
     version: 1.4.7
     dependencies:
       '@types/express': registry.npmmirror.com/@types/express/4.17.13
+    dev: true
+
+  registry.npmmirror.com/@types/node/14.0.26:
+    resolution: {integrity: sha512-W+fpe5s91FBGE0pEa0lnqGLL4USgpLgs4nokw16SrBBco/gQxuua7KnArSEOd5iaMqbbSHV10vUDkJYJJqpXKA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-14.0.26.tgz}
+    name: '@types/node'
+    version: 14.0.26
     dev: true
 
   registry.npmmirror.com/@types/node/18.0.4:

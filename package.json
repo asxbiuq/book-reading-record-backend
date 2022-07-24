@@ -2,13 +2,12 @@
   "name": "book_reading_record_backend",
   "type": "module",
   "engines": {
-    "node":"16.15.0"
+    "node": "16.15.0"
   },
   "scripts": {
     "build": "rollup -c",
-    "build:watch": "rollup -c --watch",
     "start": "node dist/index.js",
-    "dev": "nodemon",
+    "dev": "rollup -c --watch",
     "lint": "eslint --ext .js --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
   },
@@ -28,6 +27,7 @@
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-run": "^2.1.0",
     "@rollup/plugin-strip": "^2.1.0",
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/ali-oss": "^6.16.4",

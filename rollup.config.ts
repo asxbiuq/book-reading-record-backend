@@ -5,6 +5,9 @@ import typescript from 'rollup-plugin-typescript2'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import run from '@rollup/plugin-run';
+
+const dev = process.env.ROLLUP_WATCH === 'true'
 
 export default defineConfig({
   input: 'src/index.ts',
@@ -13,9 +16,13 @@ export default defineConfig({
     exclude: 'node_modules/**'
   },
   output: {
-    file: 'dist/index.js'
+    file: 'dist/index.js',
+    sourcemap: true
   },
   plugins: [
+    dev && run({
+      execArgv: ['-r', 'source-map-support/register']
+    }),
     // nodeResolve({preferBuiltins: true}),
     // commonjs({
     //   // defaultIsModuleExports:true
