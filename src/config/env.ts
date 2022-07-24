@@ -12,6 +12,7 @@ const pathsDotenv = resolveApp('.env')
 // 按优先级由高到低的顺序加载.env文件
 config({ path: `${pathsDotenv}.local` }) // 加载.env.local
 config({ path: `${pathsDotenv}.development` }) // 加载.env.development
+config({ path: `${pathsDotenv}.development.local` }) // 加载.env.development.local
 config({ path: `${pathsDotenv}` }) // 加载.env
 
 // 打印一下此时的process.env

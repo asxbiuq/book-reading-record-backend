@@ -1,6 +1,5 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-// import { connect, set } from 'mongoose'
 import mongoose from 'mongoose'
 const { set, connect } = mongoose
 import multer from 'multer'
@@ -15,6 +14,9 @@ import { errorHandler } from 'middleware/handleError.js'
 import '@/config/env.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
+
+
+
 
 
 const app = express()

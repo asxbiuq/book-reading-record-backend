@@ -5,9 +5,9 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --environment NODE_ENV:production",
     "start": "node dist/index.js",
-    "dev": "rollup -c --watch",
+    "dev": "rollup -c --watch --environment NODE_ENV:development",
     "lint": "eslint --ext .js --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
   },
@@ -43,7 +43,6 @@
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.2.0",
-    "nodemon": "^1.18.4",
     "prettier": "2.7.1",
     "rollup": "^2.77.0",
     "rollup-plugin-node-resolve": "^5.2.0",

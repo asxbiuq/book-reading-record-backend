@@ -7,7 +7,8 @@ import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import run from '@rollup/plugin-run';
 
-const dev = process.env.ROLLUP_WATCH === 'true'
+const dev = process.env.NODE_ENV === 'development'
+const pro = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
   input: 'src/index.ts',
@@ -17,7 +18,7 @@ export default defineConfig({
   },
   output: {
     file: 'dist/index.js',
-    sourcemap: true
+    sourcemap: dev
   },
   plugins: [
     dev && run({
@@ -30,12 +31,12 @@ export default defineConfig({
     typescript({
       tsconfig: 'tsconfig.json',
     }),
-    // terser(),
+    pro && terser(),
     json(),
-    // strip({
-    //   include: '**/*.(ts|js)',
-    //   labels: ['unittest'],
-    //   // functions:[ 'console.log']
-    // }),
+    pro && strip({
+      include: '**/*.(ts|js)',
+      labels: ['unittest'],
+      // functions:[ 'console.log']
+    }),
   ],
 })
