@@ -8,6 +8,7 @@ import OSS from 'ali-oss'
 import path from 'path'
 import fs from 'fs'
 import { last } from 'lodash-es'
+import Fav from 'models/fav.js'
 
 export const getPosts = async (
   req: { userId: string; params: { page: number } },
@@ -15,18 +16,18 @@ export const getPosts = async (
   res: {
     status: (arg0: number) => {
       (): any
-      new (): any
+      new(): any
       json: {
         (arg0: { message: string; posts: Array<any> }): void
-        new (): any
+        new(): any
       }
     }
   },
   next: (arg0: unknown) => void
 ) => {
   const { page } = req.params
-
-  const posts = await Post.find({})
+  const { userId } = req
+  let posts: Post[] = await Post.find({})
     .skip((page - 1) * 3)
     .limit(3)
 
@@ -36,9 +37,22 @@ export const getPosts = async (
       message: `Fetched posts(page: ${page}) failed.`,
     }
   }
+  // isfav
+  const postsMapResult = await Promise.all(
+    posts.map(async (post: Post) => {
+      const result = await Fav.findOne({ creator: userId, postId: post._id })
+      if (result) {
+        post.isFav = true
+      } else {
+        post.isFav = false
+      }
+      return post
+    })
+  )
+  // console.log('postsMapResult: ', postsMapResult)
   res.status(200).json({
     message: 'Fetched posts successfully.',
-    posts: posts,
+    posts: postsMapResult,
   })
   console.log('Fetched posts successfully')
 }
@@ -57,8 +71,8 @@ export const createPost = async (
   res: {
     status: (arg0: number) => {
       (): any
-      new (): any
-      json: { (arg0: { message: string; post: any }): void; new (): any }
+      new(): any
+      json: { (arg0: { message: string; post: any }): void; new(): any }
     }
   },
   next: (arg0: unknown) => void
@@ -125,8 +139,8 @@ export const getPost = async (
   res: {
     status: (arg0: number) => {
       (): any
-      new (): any
-      json: { (arg0: { message: string; post: {} }): void; new (): any }
+      new(): any
+      json: { (arg0: { message: string; post: {} }): void; new(): any }
     }
   },
   next: (arg0: unknown) => void
@@ -160,8 +174,8 @@ export const updatePost = async (
   res: {
     status: (arg0: number) => {
       (): any
-      new (): any
-      json: { (arg0: { message: string; post: object }): void; new (): any }
+      new(): any
+      json: { (arg0: { message: string; post: object }): void; new(): any }
     }
   },
   next: (arg0: unknown) => void
@@ -203,8 +217,8 @@ export const deletePost = async (
   res: {
     status: (arg0: number) => {
       (): any
-      new (): any
-      json: { (arg0: { message: string }): void; new (): any }
+      new(): any
+      json: { (arg0: { message: string }): void; new(): any }
     }
   },
   next: (arg0: unknown) => void
@@ -245,4 +259,51 @@ export const deletePost = async (
   res.status(200).json({ message: 'Deleted post!' })
 
   console.log('Deleted post!')
+}
+
+export const getMyPosts = async (
+  req: { userId: string; params: { page: number } },
+
+  res: {
+    status: (arg0: number) => {
+      (): any
+      new(): any
+      json: {
+        (arg0: { message: string; posts: Array<any> }): void
+        new(): any
+      }
+    }
+  },
+  next: (arg0: unknown) => void
+) => {
+  const { page } = req.params
+  const { userId } = req
+  let posts: Post[] = await Post.find({creator:userId})
+    .skip((page - 1) * 3)
+    .limit(3)
+
+  if (!posts) {
+    throw {
+      statusCode: 404,
+      message: `Fetched posts(page: ${page}) failed.`,
+    }
+  }
+  // isfav
+  const postsMapResult = await Promise.all(
+    posts.map(async (post: Post) => {
+      const result = await Fav.findOne({ creator: userId, postId: post._id })
+      if (result) {
+        post.isFav = true
+      } else {
+        post.isFav = false
+      }
+      return post
+    })
+  )
+  // console.log('postsMapResult: ', postsMapResult)
+  res.status(200).json({
+    message: 'Fetched posts successfully.',
+    posts: postsMapResult,
+  })
+  console.log('Fetched posts successfully')
 }
