@@ -93,7 +93,7 @@ export const createPost = async (
   const { title, author, isFav, creator, time } = req.body
 
 
-  const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
+  // const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
   console.log('rootUrl: ',rootUrl)
   let ossImageName = req.file.path.toString()
   let imageUrl = `${rootUrl}\\${req.file.path}`

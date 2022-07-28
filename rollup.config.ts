@@ -31,12 +31,18 @@ export default defineConfig({
     typescript({
       tsconfig: 'tsconfig.json',
     }),
-    pro && terser(),
+    // pro && terser(),
+    // terser(),
     json(),
-    pro && strip({
-      include: '**/*.(ts|js)',
-      labels: ['unittest'],
-      // functions:[ 'console.log']
-    }),
+    // pro && strip({
+    //   include: '**/*.(ts|js)',
+    //   labels: ['unittest'],
+    //   // functions:[ 'console.log']
+    // }),
+    // strip({
+    //   include: '**/*.(ts|js)',
+    //   labels: ['unittest'],
+    //   // functions:[ 'console.log']
+    // }),
   ],
 })
