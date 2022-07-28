@@ -5,6 +5,7 @@ import { assign } from 'lodash-es'
 import User from 'models/user.js'
 import Fav from 'models/fav.js'
 
+
 export const getFav = async (
   req: { userId: string; params: { page: number } },
   res: {
@@ -42,7 +43,7 @@ export const getFav = async (
   // console.log(posts)
   if (posts) {
     console.log('Fetched fav posts successfully')
-    console.log('posts: ',posts)
+    // console.log('posts: ',posts)
     res.status(200).json({
       message: 'Fetched fav favs successfully.',
       favs: posts,

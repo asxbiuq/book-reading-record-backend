@@ -9,6 +9,10 @@ import path from 'path'
 import fs from 'fs'
 import { last } from 'lodash-es'
 import Fav from 'models/fav.js'
+import { fileURLToPath } from 'url'
+
+
+
 
 export const getPosts = async (
   req: { userId: string; params: { page: number } },
@@ -87,22 +91,14 @@ export const createPost = async (
   }
 
   const { title, author, isFav, creator, time } = req.body
-  if (!process.env.Storage_URL) {
-    throw `process.env.Storage_URL is ${process.env.Storage_URL || null}`
-  }
 
+
+  const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
+  console.log('rootUrl: ',rootUrl)
   let ossImageName = req.file.path.toString().slice(7)
-  let imageUrl = `C:\\Users\\72994\\Downloads\\Chrome_download\\js\\book-reading-record-backend\\src\\tmp\\${req.file.path}`
+  let imageUrl = `${rootUrl}\\${req.file.path}`
+  console.log('imageUrl: ',imageUrl)
 
-  let client = new OSS({
-    // yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
-    region: 'oss-cn-shanghai',
-    // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
-    accessKeyId: 'LTAI5tGazUPpfGYbyniy5dzq',
-    accessKeySecret: 'eLiCtlk39kVOZmWztLIXmeHxOmKI1x',
-    // 填写Bucket名称。
-    bucket: 'webplus-cn-shanghai-s-62a8832ef968dd14ceb7c781',
-  })
 
   const ossResult = await client.put(ossImageName, path.normalize(imageUrl))
 
