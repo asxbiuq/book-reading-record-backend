@@ -95,11 +95,11 @@ export const createPost = async (
 
   const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
   console.log('rootUrl: ',rootUrl)
-  let ossImageName = req.file.path.toString().slice(7)
+  let ossImageName = req.file.path.toString()
   let imageUrl = `${rootUrl}\\${req.file.path}`
   console.log('imageUrl: ',imageUrl)
 
-
+  console.log('ossImageName: ',ossImageName)
   const ossResult = await client.put(ossImageName, path.normalize(imageUrl))
 
   const post = new Post({
