@@ -20,6 +20,7 @@ interface Comment {
 }
 
 interface Post {
+  content:string
   title: string
   imageUrl: string
   content: string

@@ -1,6 +1,6 @@
 import { client } from '@/config/oss.js'
 import Post from 'models/post.js'
-import expressValidator from 'express-validator'
+import expressValidator, { Result } from 'express-validator'
 const { validationResult } = expressValidator
 import { assign } from 'lodash-es'
 import User from 'models/user.js'
@@ -69,8 +69,9 @@ export const createPost = async (
       isFav: boolean
       creator: string
       time: any
+      content:string
     }
-    file: { originalname: string; path: string | number }
+    file: { originalname: string; path: string | number } | null 
   },
   res: {
     status: (arg0: number) => {
@@ -90,25 +91,37 @@ export const createPost = async (
     }
   }
 
-  const { title, author, isFav, creator, time } = req.body
+  const { title, author, isFav, creator, time,content } = req.body
 
-
+  let imageUrl
   const rootUrl = fileURLToPath(new URL('../',import.meta.url).href)
   console.log('rootUrl: ',rootUrl)
-  let ossImageName = req.file.path.toString()
-  let imageUrl = `${rootUrl}\\${req.file.path}`
-  console.log('imageUrl: ',imageUrl)
+  if (req.file) {
+    let ossImageName = req.file.path.toString().slice(4)
+    let ossImageUrl = `${rootUrl}\\${req.file.path}`
+    console.log('ossImageUrl: ',ossImageUrl)
+    console.log('ossImageName: ',ossImageName)
+    const ossResult = await client.put(ossImageName, path.normalize(ossImageUrl))
+    fs.unlink(ossImageUrl, (err) => {
+      if (err) {
+        throw {
+          message: err.message,
+        }
+      }
+      // console.log('remove file success')
+    })
+    imageUrl = ossResult.url
+  }
 
-  console.log('ossImageName: ',ossImageName)
-  const ossResult = await client.put(ossImageName, path.normalize(imageUrl))
 
   const post = new Post({
     title: title,
     author: author,
     isFav: isFav,
     time: time,
-    imageUrl: ossResult.url,
+    imageUrl: imageUrl,
     creator: creator,
+    content: content
   })
   // assign(post,req.body)
 
@@ -117,12 +130,6 @@ export const createPost = async (
   if (result) {
     console.log('Post created successfully!')
 
-    fs.unlink(imageUrl, (err) => {
-      if (err) {
-        throw new Error(err.message)
-      }
-      // console.log('remove file success')
-    })
     res.status(201).json({
       message: 'Post created successfully!',
       post: post,
@@ -235,17 +242,19 @@ export const deletePost = async (
     }
   }
   const result = await Post.findByIdAndRemove(postId)
-
-  const imageUrl = last(result.imageUrl.split('/'))
-  // console.log(imageUrl)
-  if (typeof imageUrl === 'string') {
-    let ossDeleteResult: any = await client.delete(imageUrl)
-    if (ossDeleteResult.res.status !== 204) {
-      throw new Error(`delete oss failed, ossDeleteResult: ${ossDeleteResult}`)
+  let imageUrl
+  if (result.imageUrl) {
+    imageUrl = last(result.imageUrl.split('/'))
+    if (typeof imageUrl === 'string') {
+      let ossDeleteResult: any = await client.delete(imageUrl)
+      if (ossDeleteResult.res.status !== 204) {
+        throw new Error(`delete oss failed, ossDeleteResult: ${ossDeleteResult}`)
+      }
+    } else {
+      throw new Error(`delete image failed, imageUrl:${imageUrl ?? null}`)
     }
-  } else {
-    throw new Error(`delete image failed, imageUrl:${imageUrl ?? null}`)
   }
+  // console.log(imageUrl)
   const user = await User.findById(req.userId)
   await user.posts.pull(postId)
   await user.save()
@@ -301,5 +310,6 @@ export const getMyPosts = async (
     message: 'Fetched posts successfully.',
     posts: postsMapResult,
   })
+  console.log('postsMapResultL: ',postsMapResult)
   console.log('Fetched posts successfully')
 }

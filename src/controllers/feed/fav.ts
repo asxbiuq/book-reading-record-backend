@@ -30,10 +30,12 @@ export const getFav = async (
   let posts: Post[] = []
   await Promise.all(
     favs.map(async (fav: Fav) => {
-      const post = await Post.findOne({ _id: fav.postId })
-      console.log('post: ',post)
-      post.isFav = true
-      posts.push(post)
+      const post :Post | null = await Post.findOne({ _id: fav.postId })
+      if(post){
+        post.isFav = true
+        posts.push(post)
+        console.log('fav: ',post)
+      }
     })
   )
 

@@ -10,11 +10,11 @@ const postSchema = new Schema(
     },
     imageUrl: {
       type: String,
-      required: true,
+      required: false,
     },
     content: {
       type: String,
-      required: false,
+      required: true,
     },
     creator: {
       type: Schema.Types.ObjectId,

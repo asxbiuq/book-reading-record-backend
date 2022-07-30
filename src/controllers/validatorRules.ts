@@ -5,7 +5,7 @@ import User from 'models/user.js'
 // POST /feed/post
 
 const postValidator = [
-  body('title').trim().isLength({ min: 5 }),
+  body('title').trim().isLength({ min: 1 }),
   // body('content')
   //   .trim()
   //   .isLength({ min: 5 })
@@ -13,8 +13,8 @@ const postValidator = [
 
 // PUT /feed/post
 const putValidator = [
-  body('title').trim().isLength({ min: 5 }),
-  body('author').trim().isLength({ min: 5 }),
+  body('title').trim().isLength({ min: 1 }),
+  body('author').trim().isLength({ min: 1 }),
 ]
 //  /auth/signup
 const signupValidator = [
@@ -29,7 +29,7 @@ const signupValidator = [
       })
     })
     .normalizeEmail(),
-  body('password').trim().isLength({ min: 5 }),
+  body('password').trim().isLength({ min: 1 }),
   body('name').trim().not().isEmpty(),
 ]
 //  /auth/status
