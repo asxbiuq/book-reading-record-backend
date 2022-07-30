@@ -1,11 +1,10 @@
 import OSS from 'ali-oss'
 
+
 if (!process.env.ossAccessKeyId && !process.env.ossAccessKeySecret) {
   throw new Error(
-    `process.env.ossAccessKeyId is ${
-      process.env.ossAccessKeyId ?? null
-    }, process.env.ossAccessKeySecret is ${
-      process.env.ossAccessKeySecret ?? null
+    `process.env.ossAccessKeyId is ${process.env.ossAccessKeyId ?? null
+    }, process.env.ossAccessKeySecret is ${process.env.ossAccessKeySecret ?? null
     }`
   )
 }
@@ -18,3 +17,6 @@ export const client = new OSS({
   // 填写Bucket名称。
   bucket: process.env.ossBucket,
 })
+
+
+
