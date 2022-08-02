@@ -66,16 +66,17 @@ app.use(setHeader)
 
 
 
-app.get("/", (req, res,next) => {
+app.get('/', (req, res,next) => {
   res.sendFile(`${rootUrl}/public/index.html`)
 });
-app.use('/', express.static('public'))
-app.use('/auth', authRoutes)
-app.use('/reply', replyRoutes)
-app.use('/comment', commentRoutes)
-app.use('/post', postRoutes)
-app.use('/fav', favRoutes)
-app.use('/*', (req, res,next) => {
+// app.use('/', express.static('public'))
+app.use('/assets', express.static('public/assets'))
+app.use('/api/auth', authRoutes)
+app.use('/api/reply', replyRoutes)
+app.use('/api/comment', commentRoutes)
+app.use('/api/post', postRoutes)
+app.use('/api/fav', favRoutes)
+app.use('/(.*)', (req, res,next) => {
   res.sendFile(`${rootUrl}/public/index.html`)
 })
 app.use(errorHandler)
