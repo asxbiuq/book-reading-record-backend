@@ -75,7 +75,9 @@ app.use('/reply', replyRoutes)
 app.use('/comment', commentRoutes)
 app.use('/post', postRoutes)
 app.use('/fav', favRoutes)
-
+app.use('*', (req, res,next) => {
+  res.sendFile(`${rootUrl}/public/index.html`)
+})
 app.use(errorHandler)
 
 try {
