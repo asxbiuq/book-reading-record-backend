@@ -5,6 +5,7 @@ import { signupValidator } from 'controllers/validatorRules.js'
 
 const router: any = Router()
 
+
 router.put('/signup', signupValidator, signup)
 
 router.post('/login', login)

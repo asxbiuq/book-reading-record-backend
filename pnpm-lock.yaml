@@ -41,6 +41,8 @@ specifiers:
   unplugin-auto-import: ^0.9.3
   vite: ^2.9.8
   vite-node: ^0.18.0
+  vite-plugin-live-reload: ^3.0.0
+  vite-plugin-restart: ^0.2.0
 
 dependencies:
   ali-oss: registry.npmmirror.com/ali-oss/6.17.1
@@ -85,6 +87,8 @@ devDependencies:
   unplugin-auto-import: registry.npmmirror.com/unplugin-auto-import/0.9.3_rollup@2.77.0+vite@2.9.14
   vite: registry.npmmirror.com/vite/2.9.14
   vite-node: registry.npmmirror.com/vite-node/0.18.0
+  vite-plugin-live-reload: registry.npmmirror.com/vite-plugin-live-reload/3.0.0
+  vite-plugin-restart: registry.npmmirror.com/vite-plugin-restart/0.2.0_vite@2.9.14
 
 packages:
 
@@ -4204,6 +4208,27 @@ packages:
       - sass
       - stylus
       - supports-color
+    dev: true
+
+  registry.npmmirror.com/vite-plugin-live-reload/3.0.0:
+    resolution: {integrity: sha512-1ucmNc/UxiKvzudcVzgs+bTM3FHOLcso6U7kto2ujQsBoQolxAV7mMbqWtQ5jetm0hRiOvMada7QsP+IIK7+7w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-live-reload/-/vite-plugin-live-reload-3.0.0.tgz}
+    name: vite-plugin-live-reload
+    version: 3.0.0
+    dependencies:
+      chokidar: registry.npmmirror.com/chokidar/3.5.3
+      picocolors: registry.npmmirror.com/picocolors/1.0.0
+    dev: true
+
+  registry.npmmirror.com/vite-plugin-restart/0.2.0_vite@2.9.14:
+    resolution: {integrity: sha512-DDgZh2EM0b2ZvqMpk3AOiXMP/ZOLhrJhUvcYkV21qbBl85tM5ezzt2OUXamV0wIsOzz3UDFAnLcHs3k6G3QMWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-restart/-/vite-plugin-restart-0.2.0.tgz}
+    id: registry.npmmirror.com/vite-plugin-restart/0.2.0
+    name: vite-plugin-restart
+    version: 0.2.0
+    peerDependencies:
+      vite: ^2.9.0 || ^3.0.0
+    dependencies:
+      micromatch: registry.npmmirror.com/micromatch/4.0.5
+      vite: registry.npmmirror.com/vite/2.9.14
     dev: true
 
   registry.npmmirror.com/vite/2.9.14:

@@ -58,6 +58,7 @@ export const getPosts = async (
     message: 'Fetched posts successfully.',
     posts: postsMapResult,
   })
+  console.log(16516516)
   console.log('Fetched posts successfully')
 }
 

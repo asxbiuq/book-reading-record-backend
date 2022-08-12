@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./index.6c440200.js";const _={},c={class:"page-404"};function o(r,n){return t(),a("div",c,"404, \u9875\u9762\u4E0D\u5B58\u5728!")}var i=e(_,[["render",o],["__scopeId","data-v-7cd9b941"]]);export{i as default};
