@@ -7,10 +7,10 @@
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
     "start": "node dist/index.js",
-    "dev": "rollup -c --watch --environment NODE_ENV:development",
+    "dev:rollup": "rollup -c --watch --environment NODE_ENV:development",
     "lint": "eslint --ext .js --ignore-path .gitignore --fix src",
     "format": "prettier .  --write",
-    "dev2": "npx vite-node ViteNodeRunner.ts"
+    "dev": "npx vite-node ViteNodeRunner.ts"
   },
   "dependencies": {
     "ali-oss": "^6.17.1",
